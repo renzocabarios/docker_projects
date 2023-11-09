@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+  app:
+    container_name: dockerized-node
+    build: .
+    environment:
+    - API_PORT=${API_PORT}
+    - DB_HOST=mongo_db
+    - DB_PORT=${DB_PORT}
+    - DB_COLLECTION=${DB_COLLECTION}
+    - HASH_SALT=${HASH_SALT}
+    - JWT_KEY=${JWT_KEY}
+    ports:
+    - ${API_PORT}:${API_PORT}
+    restart: always
+    depends_on: 
+      - mongo_db
+
+volumes:
+  mongo_data: {}
+
+
+
+
+
+
