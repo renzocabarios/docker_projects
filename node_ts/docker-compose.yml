@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  app:
+    container_name: dockerized-node
+    build: .
+    environment:
+    - PORT=${PORT}
+    ports:
+    - ${PORT}:${PORT}
+    restart: always
